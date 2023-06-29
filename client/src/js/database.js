@@ -24,6 +24,8 @@ export const putDb = async (newContent) => {
   const store = tx.objectStore('jate');
   
   const existingData = await store.getAll();
+  console.log('existingData---------');
+  console.log(existingData);
   if (existingData) {
     existingData.content = newContent;
     const request = store.put(existingData);
@@ -52,8 +54,11 @@ export const getDb = async () => {
     const request = store.getAll();
 
     const result = await request;
-    console.log('result.value', result[0].content);
-    return result[0].content;
+    console.log('result.value', result);
+    const index = result.length - 1;
+    console.log(`result[${index}].content`);
+    console.log(result[index].content);
+    return result.content;
     
   } catch (err) {
     console.log('getDb error------');
